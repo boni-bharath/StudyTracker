@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '../components/layout/AppLayout'
 import { LoginPage } from '../features/auth/LoginPage'
 import { ProtectedRoute } from '../features/auth/ProtectedRoute'
@@ -74,6 +74,7 @@ export function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route path="/todo" element={<Navigate replace to="/todos" />} />
       <Route
         path="/settings"
         element={

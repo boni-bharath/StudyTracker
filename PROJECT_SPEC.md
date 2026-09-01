@@ -402,6 +402,14 @@ See `implementation.md` for the implemented folders, dependencies, commands, and
 - Linting, formatting, and production build validation passed. A real Supabase disposable-account sign-up was attempted; email confirmation prevented a session from being issued, so authenticated browser, RLS-record, concurrency, cross-feature, and responsive-viewport checks are documented as blocked rather than claimed as passing.
 - No application feature, schema, migration, RLS policy, deployment, or PWA behavior was changed in this phase.
 
+### Completed (Phase 14: Production deployment preparation)
+
+- Added Vercel SPA routing configuration so direct requests for React client routes serve `index.html` and remain available to `BrowserRouter`.
+- Added a compatibility redirect from `/todo` to the existing canonical `/todos` route.
+- Added a documented Vercel deployment procedure, public environment-variable requirements, Supabase Auth URL Configuration steps, and an explicit production smoke-test checklist in `DEPLOYMENT.md`.
+- The application has been prepared for deployment but has not been deployed from this workspace. A real production URL and authenticated production verification remain required before declaring deployment successful.
+- No database schema or RLS changes, PWA work, service-role keys, or production credentials were added.
+
 ### Still deferred
 
 - Generating TypeScript database types and live browser verification with configured public browser environment variables.

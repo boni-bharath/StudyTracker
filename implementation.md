@@ -209,6 +209,15 @@ npm run preview
 
 Phase 12 static acceptance checks are complete. Do not begin a new phase or deployment automatically; repeat the blocked authenticated browser checks with a confirmed test account.
 
+## Phase 14: Production deployment preparation
+
+- Added `vercel.json` with the official Vercel Vite SPA rewrite from every path to `/index.html`. This is required because the application uses `BrowserRouter`, so direct navigation to a client route must be served by the SPA rather than return a Vercel 404.
+- Added a compatibility redirect from `/todo` to the canonical existing `/todos` route; this does not add a product feature or data behavior.
+- Added `DEPLOYMENT.md` with the exact Vercel configuration, required public browser environment variables, Supabase Auth URL Configuration steps, and production smoke-test procedure.
+- The repository does not contain a production URL, Vercel account connection, or authenticated browser session. No deployment or production smoke test was performed or claimed.
+- Production must use only `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in Vercel. Never use a Supabase service-role key, database password, or access token in a Vite frontend environment variable.
+- Validation before the deployment-preparation change: `npm run lint` and `npm run build` passed. `npm run format:check` identified formatting only in `FINAL_TEST_REPORT.md`; it is normalized as part of the Phase 14 documentation update and validation is rerun after all changes.
+
 ## Database layer
 
 The deployed database foundation is defined by `supabase/migrations/20260831120000_initial_schema.sql`, with the additive subject-color migration in `supabase/migrations/20260831213000_add_subject_color.sql`. The application now uses the schema through the authenticated Supabase browser client.
