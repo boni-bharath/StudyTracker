@@ -382,7 +382,20 @@ See `implementation.md` for the implemented folders, dependencies, commands, and
 - Added a Settings page with loading, validation, save, and success/error feedback.
 - Applied the saved theme preference at the app root and used the saved daily goal in the statistics goal-progress calculation.
 
+### Completed (Phase 10: Dashboard Integration)
+
+- Replaced the Dashboard placeholder with an at-a-glance authenticated view of today's completed study time, saved daily goal and progress, current and longest streak, subject breakdown, recent completed sessions, and pending tasks.
+- The Dashboard reuses the existing Statistics/Streak derivations, Settings context, Todo hook, and Study Timer hook. It introduces no cached totals, duplicate session/todo queries, database migration, RLS change, or second timer implementation.
+- An active session shows its existing live elapsed display and subject with a Continue Study action. Without one, the primary action opens the Study page; users without subjects are guided to Subjects.
+- Loading, empty, error, refresh, and responsive layouts are handled for the independent dashboard data areas.
+
+### Completed (Phase 11: UI/UX and Responsive Polish)
+
+- Audited Dashboard, Study, Subjects, Statistics, History, Tasks, Settings, Login, shared navigation, cards, forms, and loading/empty/error states for responsive and accessibility issues.
+- Removed the global `body` minimum width that caused horizontal scrolling on the Tasks page at narrow viewport widths. The task content now uses min-width and word-wrapping safeguards, while action groups and confirmation dialogs wrap or scroll within their own bounds when needed; no global overflow hiding was added.
+- Added a consistent keyboard-visible focus ring, larger mobile navigation touch target, contained mobile navigation panel, more compact small-screen page spacing, and responsive card/form safeguards.
+- Tuned History filters and session rows for narrow widths, and improved Statistics chart/filter readability with responsive height, non-cropping margins, preserved tick spacing, and accessible chart labels.
+
 ### Still deferred
 
 - Generating TypeScript database types and live browser verification with configured public browser environment variables.
-- Dashboard data implementation.

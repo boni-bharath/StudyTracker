@@ -1,15 +1,5 @@
 import { useState } from 'react'
-import { useStudyTimer } from './useStudyTimer'
-
-function formatDuration(totalSeconds: number) {
-  const hours = Math.floor(totalSeconds / 3600)
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-  const seconds = totalSeconds % 60
-
-  return [hours, minutes, seconds]
-    .map((unit) => unit.toString().padStart(2, '0'))
-    .join(':')
-}
+import { formatStudyTimerDuration, useStudyTimer } from './useStudyTimer'
 
 function completedDurationSeconds(startTime: string, endTime: string | null) {
   if (!endTime) return 0
@@ -99,10 +89,10 @@ export function StudyPage() {
             )}
           </div>
           <p
-            aria-label={`Elapsed study time: ${formatDuration(activeElapsedSeconds)}`}
+            aria-label={`Elapsed study time: ${formatStudyTimerDuration(activeElapsedSeconds)}`}
             className="mt-7 font-mono text-5xl font-bold tracking-tight text-slate-950 sm:text-6xl"
           >
-            {formatDuration(activeElapsedSeconds)}
+            {formatStudyTimerDuration(activeElapsedSeconds)}
           </p>
           <p className="mt-2 text-sm text-slate-600">
             Hours : minutes : seconds
@@ -174,7 +164,7 @@ export function StudyPage() {
           </p>
           <p className="mt-1 text-sm text-emerald-800">
             Duration:{' '}
-            {formatDuration(
+            {formatStudyTimerDuration(
               completedDurationSeconds(
                 completedSession.start_time,
                 completedSession.end_time,

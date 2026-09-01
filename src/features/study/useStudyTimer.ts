@@ -18,6 +18,16 @@ type StudyTimerState = {
   subjects: StudySubject[]
 }
 
+export function formatStudyTimerDuration(totalSeconds: number) {
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
+
+  return [hours, minutes, seconds]
+    .map((unit) => unit.toString().padStart(2, '0'))
+    .join(':')
+}
+
 function errorMessage(error: unknown, action: string) {
   if (error instanceof StudySessionError) {
     if (error.kind === 'authentication') {

@@ -36,11 +36,12 @@ function errorMessage(error: unknown) {
   return 'We could not load your study statistics. Please try again.'
 }
 
-export function useStudyStatistics() {
+export function useStudyStatistics(initialRange: StatisticsRange = 'week') {
   const { user } = useAuth()
   const [sessions, setSessions] = useState<CompletedStudySession[]>([])
   const [streakMinimumMinutes, setStreakMinimumMinutes] = useState(30)
-  const [selectedRange, setSelectedRange] = useState<StatisticsRange>('week')
+  const [selectedRange, setSelectedRange] =
+    useState<StatisticsRange>(initialRange)
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -85,6 +86,7 @@ export function useStudyStatistics() {
     error,
     isLoading,
     loadStatistics,
+    sessions,
     selectedRange,
     setSelectedRange,
     statistics,

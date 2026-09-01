@@ -65,7 +65,7 @@ export function AppLayout({ children }: AppLayoutProps) {
           <button
             aria-controls="mobile-navigation"
             aria-expanded={isMobileNavOpen}
-            className="rounded-lg p-2 text-slate-700 hover:bg-slate-100"
+            className="min-h-11 min-w-11 rounded-lg p-2 text-slate-700 hover:bg-slate-100"
             onClick={() => setIsMobileNavOpen((open) => !open)}
             type="button"
           >
@@ -76,7 +76,10 @@ export function AppLayout({ children }: AppLayoutProps) {
           </button>
         </div>
         {isMobileNavOpen ? (
-          <div className="pt-3" id="mobile-navigation">
+          <div
+            className="mt-3 rounded-xl border border-slate-200 bg-white p-2 shadow-sm"
+            id="mobile-navigation"
+          >
             {navigation}
             <AccountActions
               email={user?.email}
@@ -88,7 +91,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         ) : null}
       </header>
 
-      <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:ml-64 lg:px-10">
+      <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:ml-64 lg:px-10">
         {children}
       </main>
     </div>

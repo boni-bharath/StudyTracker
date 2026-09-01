@@ -92,7 +92,7 @@ export function SubjectsPage() {
           )}
         </div>
 
-        <aside className="h-fit rounded-xl border border-slate-200 bg-white p-5">
+        <aside className="h-fit min-w-0 rounded-xl border border-slate-200 bg-white p-5 sm:p-6">
           <h2 className="text-lg font-semibold">
             {editingSubject ? 'Edit subject' : 'Add a subject'}
           </h2>
@@ -136,7 +136,7 @@ export function SubjectsPage() {
           className="fixed inset-0 z-30 grid place-items-center bg-slate-950/40 p-4"
           role="dialog"
         >
-          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+          <div className="max-h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto rounded-xl bg-white p-5 shadow-xl sm:p-6">
             <h2 className="text-lg font-semibold" id="delete-subject-title">
               Delete {deletingSubject.name}?
             </h2>

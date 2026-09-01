@@ -81,8 +81,8 @@ export function HistoryPage() {
         </div>
       ) : (
         <>
-          <div className="mt-8 grid gap-4 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2">
-            <div>
+          <div className="mt-8 grid gap-4 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2 sm:p-5">
+            <div className="min-w-0">
               <label
                 className="text-sm font-medium text-slate-700"
                 htmlFor="history-subject"
@@ -103,7 +103,7 @@ export function HistoryPage() {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="min-w-0">
               <label
                 className="text-sm font-medium text-slate-700"
                 htmlFor="history-date"
@@ -149,14 +149,14 @@ export function HistoryPage() {
                     {group.map((session) => (
                       <li className="p-4 sm:p-5" key={session.id}>
                         <div className="flex flex-wrap items-center justify-between gap-3">
-                          <div className="flex items-center gap-3">
+                          <div className="flex min-w-0 items-center gap-3">
                             <span
                               aria-hidden="true"
                               className="h-4 w-4 shrink-0 rounded-full border border-slate-300"
                               style={{ backgroundColor: session.subject.color }}
                             />
-                            <div>
-                              <p className="font-semibold text-slate-900">
+                            <div className="min-w-0">
+                              <p className="truncate font-semibold text-slate-900">
                                 {session.subject.name}
                               </p>
                               <p className="mt-1 text-sm text-slate-600">

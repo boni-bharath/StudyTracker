@@ -23,7 +23,7 @@ const ranges: Array<{ label: string; value: StatisticsRange }> = [
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <p className="text-sm font-medium text-slate-600">{label}</p>
       <p className="mt-2 text-2xl font-bold tracking-tight text-slate-950">
         {value}
@@ -153,7 +153,7 @@ export function StatisticsPage() {
             </p>
           </div>
 
-          <div className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <div className="mt-6 min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">
@@ -164,6 +164,7 @@ export function StatisticsPage() {
                 </p>
               </div>
               <label className="text-sm font-medium text-slate-700">
+                <span className="mr-2 hidden sm:inline">Range</span>
                 <span className="sr-only">Chart range</span>
                 <select
                   className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-950 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
@@ -180,13 +181,19 @@ export function StatisticsPage() {
                 </select>
               </label>
             </div>
-            <div className="mt-6 h-72">
+            <div
+              aria-label="Study time bar chart"
+              className="mt-6 h-64 sm:h-72"
+              role="img"
+            >
               <ResponsiveContainer height="100%" width="100%">
-                <BarChart
-                  data={dailyChartData}
-                  margin={{ left: -18, right: 8 }}
-                >
-                  <XAxis dataKey="label" tickLine={false} />
+                <BarChart data={dailyChartData} margin={{ left: 0, right: 4 }}>
+                  <XAxis
+                    dataKey="label"
+                    minTickGap={24}
+                    tick={{ fontSize: 12 }}
+                    tickLine={false}
+                  />
                   <YAxis
                     tickFormatter={(minutes) => `${minutes}m`}
                     tickLine={false}
@@ -203,7 +210,7 @@ export function StatisticsPage() {
           </div>
 
           <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-            <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <section className="min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
               <h2 className="text-lg font-semibold text-slate-900">
                 Study by subject
               </h2>
@@ -234,11 +241,15 @@ export function StatisticsPage() {
               </ul>
             </section>
 
-            <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <section className="min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
               <h2 className="text-lg font-semibold text-slate-900">
                 Distribution
               </h2>
-              <div className="mt-4 h-48">
+              <div
+                aria-label="Study time distribution chart"
+                className="mt-4 h-48"
+                role="img"
+              >
                 <ResponsiveContainer height="100%" width="100%">
                   <PieChart>
                     <Tooltip

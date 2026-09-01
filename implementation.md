@@ -2,7 +2,7 @@
 
 ## Status
 
-The initial frontend foundation, deployed Supabase migrations, Phase 3 subject management, Phase 4 study timer, Phase 5 study history, Phase 6 statistics, Phase 7 study streaks, Phase 8 task management, and Phase 9 user settings are complete. The application can be run locally, navigated on desktop and mobile, linted, and built for production. Add the public Supabase browser variables to a local `.env` file to sign up, sign in, and live-test the implemented features.
+The initial frontend foundation, deployed Supabase migrations, Phase 3 subject management, Phase 4 study timer, Phase 5 study history, Phase 6 statistics, Phase 7 study streaks, Phase 8 task management, Phase 9 user settings, Phase 10 dashboard integration, and Phase 11 UI/UX polish are complete. The application can be run locally, navigated on desktop and mobile, linted, and built for production. Add the public Supabase browser variables to a local `.env` file to sign up, sign in, and live-test the implemented features.
 
 ## Phase 3: Subject management
 
@@ -57,6 +57,21 @@ This stage intentionally does **not** include dashboard data. Subject management
 - The Settings page shows loading, save, success, and error states. When a settings row does not exist yet, the app safely uses the database defaults until the first save.
 - Theme preference is applied at the app root so the saved setting visibly changes the UI. Statistics reads the saved daily goal so the displayed goal progress reflects the user’s configuration.
 
+## Phase 10: Dashboard integration
+
+- Replaced the dashboard placeholder with a focused overview of today's completed time, saved daily goal/progress, current and longest streak, today's subject totals, recent completed sessions, and pending task count/list.
+- It composes the existing statistics/streak, settings, todo, and study-timer hooks. The statistics hook now accepts an initial range and exposes its already-loaded completed sessions, allowing the Dashboard to use the existing today aggregation and recent-session query result without another service query or calculation.
+- The active-session panel uses `useStudyTimer`'s timestamp-based live elapsed value and sends users to `/study` to continue. The primary Start Study action, no-subject guidance, independent loading/empty/error states, refresh control, and mobile-first grids are included.
+- No schema, RLS, authentication, cache, or new timer implementation was added.
+- `npm run lint`, `npm run format:check`, and `npm run build` pass. The local Vite runtime responds successfully; authenticated data-state verification requires an interactive signed-in browser session.
+
+## Phase 11: UI/UX and responsive polish
+
+- Audited the shared layout and all major routes for hierarchy, spacing, control consistency, mobile compression, loading/empty/error feedback, and keyboard accessibility.
+- Removed `min-w-80` from `body`, the actual cause of the previous Tasks page overflow at a 320px viewport with a vertical scrollbar. Added targeted `min-w-0`, `break-words`, wrapping action controls, and bounded dialog scrolling so content can shrink naturally instead of being globally clipped.
+- Added a consistent `:focus-visible` treatment, a 44px mobile navigation target, a surfaced mobile menu panel, reduced mobile page padding, and responsive card/form protections. Statistics charts now retain readable tick spacing and use safe mobile chart dimensions; History filters and rows handle narrow content cleanly.
+- No product, data-model, authentication, timer, statistics, streak, database, or RLS behavior changed. `npm run lint`, `npm run format:check`, and `npm run build` pass; local HTTP smoke checks return 200 for Dashboard, Study, Subjects, Statistics, History, Tasks, Settings, and Login.
+
 ## Authentication and protected routes
 
 - Added `AuthProvider`/`useAuth`, which restores the normal persisted Supabase browser session with `getSession()` and follows changes through `onAuthStateChange`.
@@ -75,7 +90,7 @@ This stage intentionally does **not** include dashboard data. Subject management
 - Settings loading and saving, theme application, daily-goal progress, and streak configuration.
 - Task create/edit/delete, completion toggling, priority, optional subject association, and calendar-date due dates.
 - Tailwind CSS configured through PostCSS.
-- React Router routes for Dashboard, Study, Subjects, Statistics, History, Todo, and Settings. Study, Subjects, Statistics, History, Todo, and Settings have feature implementations; Dashboard remains a placeholder.
+- React Router routes for Dashboard, Study, Subjects, Statistics, History, Todo, and Settings, all with feature implementations.
 - A reusable responsive application layout:
   - Fixed sidebar navigation on large screens.
   - Accessible toggleable navigation on mobile screens.
@@ -94,7 +109,7 @@ This stage intentionally does **not** include dashboard data. Subject management
 | `src/components/layout/`   | Shared visual shell: brand, desktop sidebar, and mobile navigation.                                                                             |
 | `src/components/ui/`       | Reusable generic presentation components. It currently contains the placeholder page component.                                                 |
 | `src/features/`            | One folder per app area. Each currently contains only its route page; future feature-specific components, hooks, and services belong beside it. |
-| `src/features/dashboard/`  | Dashboard page placeholder.                                                                                                                     |
+| `src/features/dashboard/`  | Dashboard composition of existing study, statistics/streak, settings, and todo feature hooks.                                                   |
 | `src/features/study/`      | Study-session service, active-timer hook, types, and Study page UI.                                                                             |
 | `src/features/subjects/`   | Subject CRUD service, state hook, form, list, and Subjects page with derived all-time study totals.                                             |
 | `src/features/auth/`       | Auth provider, session guard, and email/password login page.                                                                                    |
@@ -185,7 +200,7 @@ npm run preview
 
 ## Next step
 
-The next logical milestone is live-testing task CRUD alongside the outstanding controlled Statistics/Streak checks, then deciding the next project milestone.
+Phase 11 is complete. Do not begin a new phase or deployment automatically; choose the next milestone after interactive signed-in browser verification.
 
 ## Database layer
 
