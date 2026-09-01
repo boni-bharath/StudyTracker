@@ -72,6 +72,13 @@ This stage intentionally does **not** include dashboard data. Subject management
 - Added a consistent `:focus-visible` treatment, a 44px mobile navigation target, a surfaced mobile menu panel, reduced mobile page padding, and responsive card/form protections. Statistics charts now retain readable tick spacing and use safe mobile chart dimensions; History filters and rows handle narrow content cleanly.
 - No product, data-model, authentication, timer, statistics, streak, database, or RLS behavior changed. `npm run lint`, `npm run format:check`, and `npm run build` pass; local HTTP smoke checks return 200 for Dashboard, Study, Subjects, Statistics, History, Tasks, Settings, and Login.
 
+## Phase 12: Final end-to-end acceptance testing
+
+- Added `FINAL_TEST_REPORT.md` with the exact static validation results, source/migration security review, code-quality review, and status for every requested acceptance category.
+- `npm run lint`, `npm run format:check`, and `npm run build` passed. The build emits Vite's existing non-failing large-chunk warning.
+- A real disposable Supabase sign-up created a user but returned no session because email confirmation is enabled. As this environment lacks mailbox access and interactive browser automation, all authenticated, database-record, concurrency, cross-feature, and viewport checks are explicitly recorded as blocked rather than passed.
+- No product code, schema, migrations, RLS, authentication behavior, deployment, or PWA work was changed for this phase.
+
 ## Authentication and protected routes
 
 - Added `AuthProvider`/`useAuth`, which restores the normal persisted Supabase browser session with `getSession()` and follows changes through `onAuthStateChange`.
@@ -200,7 +207,7 @@ npm run preview
 
 ## Next step
 
-Phase 11 is complete. Do not begin a new phase or deployment automatically; choose the next milestone after interactive signed-in browser verification.
+Phase 12 static acceptance checks are complete. Do not begin a new phase or deployment automatically; repeat the blocked authenticated browser checks with a confirmed test account.
 
 ## Database layer
 

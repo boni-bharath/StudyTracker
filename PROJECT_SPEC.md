@@ -396,6 +396,12 @@ See `implementation.md` for the implemented folders, dependencies, commands, and
 - Added a consistent keyboard-visible focus ring, larger mobile navigation touch target, contained mobile navigation panel, more compact small-screen page spacing, and responsive card/form safeguards.
 - Tuned History filters and session rows for narrow widths, and improved Statistics chart/filter readability with responsive height, non-cropping margins, preserved tick spacing, and accessible chart labels.
 
+### Completed (Phase 12: Final Acceptance Testing)
+
+- Added `FINAL_TEST_REPORT.md` containing the static validation, security/code-quality audit, explicit results, issue severities, limitations, and recommended follow-up testing.
+- Linting, formatting, and production build validation passed. A real Supabase disposable-account sign-up was attempted; email confirmation prevented a session from being issued, so authenticated browser, RLS-record, concurrency, cross-feature, and responsive-viewport checks are documented as blocked rather than claimed as passing.
+- No application feature, schema, migration, RLS policy, deployment, or PWA behavior was changed in this phase.
+
 ### Still deferred
 
 - Generating TypeScript database types and live browser verification with configured public browser environment variables.
